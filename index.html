@@ -256,6 +256,7 @@
     <div class="winner-text" id="winnerText">🎉 WINNER 🎉</div>
     <div id="winnerName"></div>
     <div id="winnerReview"></div>
+    <img id="winnerImage" alt="Foto ganador" style="max-width: 180px; max-height: 180px; border-radius: 12px; margin-top: 10px; display:none;" />
     <div class="light-circle" aria-hidden="true">
       <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
@@ -296,9 +297,10 @@ function animateWinnerReveal(winnerObj) {
   const winnerText = document.getElementById('winnerText');
   const winnerName = document.getElementById('winnerName');
   const winnerReview = document.getElementById('winnerReview');
+  const winnerImage = document.getElementById('winnerImage');
   const sortBtn = document.getElementById('sortBtn');
 
-  // Ocultamos logo y título y botón
+  // Ocultamos logo, título y botón
   raffleHeader.style.display = 'none';
   sortBtn.style.display = 'none';
 
@@ -307,23 +309,25 @@ function animateWinnerReveal(winnerObj) {
 
   // Estilos para winnerText (nombre grande)
   winnerText.style.visibility = 'visible';
-  winnerText.style.fontSize = '4rem';  // tamaño medio grande
-  winnerText.style.color = '#ffd600'; // dorado
+  winnerText.style.fontSize = '4rem';
+  winnerText.style.color = '#ffd600';
   winnerText.style.fontWeight = 'bold';
   winnerText.style.textAlign = 'center';
   winnerText.style.marginBottom = '1rem';
 
   // Estilos para la reseña
   winnerReview.style.fontSize = '1.5rem';
-  winnerReview.style.color = '#000000'; // negro
+  winnerReview.style.color = '#000000';
   winnerReview.style.fontStyle = 'italic';
   winnerReview.style.textAlign = 'center';
   winnerReview.style.margin = '0 auto';
   winnerReview.style.maxWidth = '700px';
   winnerReview.style.display = 'block';
 
+  // Preparar animación
   winnerText.textContent = '...';
   winnerReview.textContent = '';
+  winnerImage.style.display = 'none';  // ocultar imagen antes de animar
 
   sortBtn.disabled = true;
 
@@ -338,551 +342,81 @@ function animateWinnerReveal(winnerObj) {
     if (iterations <= 0) {
       clearInterval(animationInterval);
       winnerText.textContent = `🎉 ${winnerObj.name.toUpperCase()} 🎉`;
-      winnerReview.textContent = `"${winnerObj.review}"`;
+      winnerReview.textContent = `"${winnerObj.review || ''}"`;
+      // Mostrar imagen del ganador
+      winnerImage.src = winnerObj.img;
+      winnerImage.style.display = 'block';
       launchConfetti();
     }
   }, interval);
 }
 
   const participants = [
-  {
-    name: "Berenice Soto",
-    review: "Buena variedad de perfumes, gran atención y sobre todo para mi lo mejor es que te dejan oler la mayoría de las fragancias, 10/10 el servicio ya he comprado tres veces con ellos y todo perfecto. La atención en la página de Facebook también es muy rápida y buena 👍"
-  },
-  {
-    name: "Martin Vazquez",
-    review: "Buenas tardes ya he comprado con usted allí en la tienda había comprado 2 estuches de Guess de mujer y un perfume de hombre Azzaro the most wanted excelente calidad y todavía lo tengo"
-  },
-  {
-    name: "Josué De los Santos",
-    review: "Sé cómo funciona esto: muchos dejan reseñas solo por el premio, pero yo vine a hablar con hechos. Pedí, revisé, comparé… y terminé sorprendido. En un mundo lleno de copias, este mayorista es la excepción: calidad real, sin teatro. No necesitas rogarme para hablar bien, lo hacen fácil con su servicio. Y si están leyendo esto para elegir ganador… dense cuenta quién lo escribió de verdad. El perfume es solo un símbolo. Lo que de verdad vale es que recomendaría este lugar con los ojos cerrados."
-  },
-  {
-    name: "Jorge Luis Alejandre",
-    review: "No suelo dejar reseñas porque siento que rara vez algo me sorprende de verdad, pero esta vez fue distinto. Pensé que sería “uno más” de esos mayoristas que prometen mucho, pero desde el primer contacto me demostraron lo contrario. La atención fue real, sin rodeos, y el producto… wow. Si no me gano el perfume, no pasa nada, porque honestamente ya gané al encontrar este lugar. Pero si lo ganara, no sería por suerte, sería porque cuando haces las cosas bien, el universo responde. Gracias por devolverme la fe en el negocio bien hecho. ✨"
-  },
-  {
-    name: "Beatriz Adriana Hernandez Medina",
-    review: "Excelente servicio, la verdad no queria comprar cualquier cosa y el chico muy atento y me dio muchas recomendaciones , él me recomendó fragancias de acuerdo al tipo de persona que le describí y fue un total acierto 🙏🏻🙏🏻🙏🏻 la verdad yo si regreso a este lugar😊…"
-  },
-  {
-    name: "Dorian’s",
-    review: "Muy contento con los perfumes que eh comprado, 100% originales , déjense caer , tienen buenas promos y dinámicas, excelente servicio 👍🏻 les recomiendo seguirlos en sus redes sociales para que tengan más información de lo que manejan ✅…"
-  },
-  {
-    name: "Oscar Sanchez",
-    review: "Buen lugar para comprar tus perfumes a buen precio y siempre buena atención al cliente recomendado 😊💯…"
-  },
-  {
-    name: "REGGAETON_CLASSICS",
-    review: "Excelente servicio y atención, Me gusta mucho que te den a oler cualquier perfume que desees, así puedes decidir cuál comprar, 100% originales a un excelente precio 🫡…"
-  },
-  {
-    name: "Luis Guzman",
-    review: "Súper buena atención al cliente y buenos precios accesibles, no se olviden de visitar esta sucursal SN Perfumes como a mí la atención será igual de excelente para ustedes‼️❤️"
-  },
-  {
-    name: "Ian Carlos Flores",
-    review: "Excelente atención al cliente y variedad de perfumes ... Para toda la familia .. excelente 😄…"
-  },
-  {
-    name: "Genesis Sevilla",
-    review: "Excelente lugar para ir por un buen perfume original y a buen precio, tienen mucha variedad y la atención es muy buena"
-  },
-  {
-    name: "Misael dm",
-    review: "💯 recomendables, si buscan perfumes buenos vale la pena ir al local encuentras de todo y lo que no hay te lo consiguen, se los recomiendo gente de Nuevo Laredo no van a querer ni salir del local no terminan de oler la variedad de perfumes, todos huelen bien, y sobre todo muy buena atención 10/10…"
-  },
-  {
-    name: "Diego Hernandez",
-    review: "Muy buen atención, amables y sobre todo facilidad de encontrar el perfume que desees 💯, recomendados todo completamente original🤙🏻.…"
-  },
-  {
-    name: "Mario Gaona",
-    review: "Excelente variedad de perfumes para hombre y dama de excelente calidad y accesibles precios, huelen todos bien ricos con una exquisita fragancia de todos los perfumes vayan con ellos a comprar no se arrepentirán"
-  },
-  {
-    name: "Karina Guerrero",
-    review: "Me gusta porque son amables en la atención al cliente, tienen bien surtido los perfumes y con gran variedad de precios, todo de calidad y original."
-  },
-  {
-    name: "Lydia Martinez",
-    review: "Excelente calidad en sus productos 🤗 Son muy amables, y manejan demasiada variedad de perfume a un increíble precio❤…"
-  },
-  {
-    name: "Iker Cruz Elizaola",
-    review: "Si buscan el mejor lugar para comprar perfumes originales a buen precio y que atiendan bien es el mejor lugar para que ustedes compren se los recomiendo muy buen servicio vayan que esperan!"
-  },
-  {
-    name: "Sergio Vilches",
-    review: "Muy buena atención al cliente y sobre todo personalizada, un muy buen lugar para los amantes de los perfumes. Excelente local"
-  },
-  {
-    name: "Jesus Baxin",
-    review: "Excelentes perfumes y 100% originales, cuentan con toda la amplia mayoría de perfumes, no batalles si buscas algo en específico y si buscas calidad de original y precio es el lugar indicado a dónde acudir, excelente atención al cliente tanto en tienda física como en redes muy atentos la verdad lo recomiendo ampliamente, 100% recomendados, excelente atención al cliente te llevas una muy buena experiencia en comprar, si buscas calidad no batalles acudan a SN perfumes ✨💯"
-  },
-  // ------- Nuevas reseñas agregadas -------
-  {
-    name: "Luis Angel Sotelo",
-    review: "Una excelente opción para comprar Perfumes de calidad & originales a un super Precio 100% recomendado"
-  },
-  {
-    name: "Silvia Camarillo",
-    review: "Atención 10/10, te ayudan a encontrar justo lo que buscas sin presionarte a comprar. Los precios están bastante bien. Súper recomendada. Ahí encontré esta joyita de perfume"
-  },
-  {
-    name: "ulises Ibarra",
-    review: "muy buena atención y gran variedad de perfumes de diseñador, árabes y nichos. muy confiables y mis paquetes siempre han llegado perfectos a Acapulco"
-  },
-  {
-    name: "Karen Jaqueline Cenovio Garcia",
-    review: "Excelente servicio y súper variedad de perfumes, si buscan calidad y buen precio este es el lugar"
-  },
-  {
-    name: "Reynaldo Garza Hernandez",
-    review: "Un excelente servicio perfumes 100 por ciento originales te dejan probar los perfumes que desees bonito lugar bien acomodados los perfumes y tienen de todo árabe , diseñador y nicho SN PERFUMES 🤩🤩🤩…"
-  },
-  {
-    name: "Ángel",
-    review: "Excelente atención, gran variedad de perfumes de diseñador y árabes, buena opción si quieres comprar la botella o decants ⭐️"
-  },
-  {
-    name: "ND King300",
-    review: "muy buen lugar para comprar perfumes de calidad 👌👌…"
-  },
-  {
-    name: "Juan Pablo Contreras",
-    review: "Muy buena atención,fui buscando un perfume pero te ayudan con recomendaciones,nada que decir que no sea positivo!"
-  },
-  {
-    name: "Orlando Rodriguez Obregon",
-    review: "Excelente servicio y atención. Adquirí un perfume que superó completamente mis expectativas, sin duda una tienda muy surtida."
-  },
-  {
-    name: "Jonathan Yael Alvarez Torres",
-    review: "Fácil de ubicar , buena atención a clientes además de contar con muestras de varios perfumes y no te niegan olerlos cuentan con alta variedad de perfumes ya sea de mujer o de caballero los precios no son tan elevados están moderados me agradó mi visita 👍🏼…"
-  },
-  {
-    name: "Oscar Jurado",
-    review: "Excelente atención al cliente ya e comprado 1 o 2 perfumes 100%recomendado y si no lo tienen te lo consiguen ☺️"
-  },
-  {
-    name: "Giil moreno",
-    review: "Excelentes perfumes y Buenos precios y muy buena atención super amable"
-  },
-  {
-    name: "Escobar Ortiz Galdino Guadalupe",
-    review: "Una alta gamma de perfumeria, excelentes precios, me gusta que puedes probar los perfumes antes de comprarlos y puedes pagar con terminal."
-  },
-  {
-    name: "Cristian Hernandez",
-    review: "La verdad buen trato al cliente, un buen lugar de confianza para comprar tus perfumes de calidad"
-  },
-  {
-    name: "Blanca Margarita Ramirez Gallegos",
-    review: "Excelentes perfumes y un buen trato por parte del personal 👍🏾😉…"
-  },
-  {
-    name: "Camilo Álvarez",
-    review: "Exelentes y buena calidad en perfumes 💯🙏🍀🍀🍀…"
-  },
-  {
-    name: "Echevarria Sánchez Carlos omar",
-    review: "Excelentes perfumes, buenisima calidad precio, y el compa David muy buena onda también, lo recomiendo al millón👍…"
-  },
-  {
-    name: "Ilse beltran Beltran hernandez",
-    review: "100% recomendado perfumes originales a precios excelentes y sobre todo la mejor atención  al cliente siempre que busco algo para regalar es mi primera opción"
-  },
-  {
-    name: "Axel Maximiliano Moreno Machado",
-    review: "Buena atención, gran variedad de perfumes y excelentes precios. Es todo lo que tiene esta perfumería 🙌…"
-  },
-  {
-    name: "franco marchan",
-    review: "Una de las mejores tiendas de perfumes, buenos precios originales, buena atencion a clientes y sobre todo unas dinámicas muy buenas  en el mundo del perfume 100% recomendado"
-  },
-  {
-    name: "Mario hernandez",
-    review: "Muy buen servicio y amabilidad, y lo más importante que son originales los perfumes👍…"
-  },
-  {
-    name: "Francisco Jaramillo",
-    review: "Muy buen sercicio, te muestran todos los perfumes, te dan tu tiempo para elegir , buenos precios y mucha variedad de aromas precios"
-  },
-  {
-    name: "Jorge Alb",
-    review: "Excelente servicio, perfumes 100% originales. Si buscan calidad, ahí es el lugar"
-  },
-  {
-    name: "Santiago Valencia Escalante",
-    review: "Muy buena muy buena variedad y calidad de perfumes de todas las marcas y modelos, todos originales"
-  },
-  {
-    name: "Elizabeth Mendoza",
-    review: "Muy buenos perfumes de buena calidad 😍…"
-  },
-  {
-    name: "Laura Alvarado",
-    review: "Muy buenos perfumes Execelente calidad Y precio Los recomiendo"
-  },
-  {
-    name: "Angel Muri",
-    review: "Muy buenos perfumes con mucha variedad como de diseñador árabes y nichos muy buen servicio al cliente"
-  },
-  {
-    name: "uriel trejo",
-    review: "Excelente trato a cliente, buen surtido de perfumes nicho, diseñador ,árabes 👍🫡10 de 10…"
-  },
-  {
-    name: "Manuel N. Ategbe",
-    review: "Excelente calidad, precio y atención, solo perfumes originales,  100% recomendable"
-  },
-  {
-    name: "Elias Dueñas",
-    review: "Muy buenos perfumes con gran variedad y de precio muy accesible 10/10"
-  },
-  {
-    name: "Cinthia Martinez",
-    review: "Tienen los mejores perfumes y muy buenos precios lo mejor esque hacen envíos a toda la república mexicana 🇲🇽…"
-  },
-  {
-    name: "Suhey Mejia",
-    review: "Me encantan todos los perfumes tienen buen olor 🫰🏻✨ 💯 recomendados…"
-  },
-  {
-    name: "el compa luisillo",
-    review: "Una local muy completo con excelente atención te recomiendan alguno en especial de acuerdo a evento o fiesta etc.. precios accesibles pura cajetita asi nomas saludos desde NL"
-  },
-  {
-    name: "Osmar Abraham Ochoa",
-    review: "Excelente servicio y atención , recomendado para conseguir los perfumes"
-  },
-  {
-    name: "Andrea Torua",
-    review: "Perfumes 100% originales y pedidos seguros, muy buena experiencia lo recomiendo✨😅…"
-  },
-  {
-    name: "Lesly Fdz",
-    review: "Excelente calidad de perfumes, recomendado💯🙌🏻…"
-  },
-  {
-    name: "Ttyc Transtech07",
-    review: "Excelente servicio ya eh comprado y llega todo original y en super buen estado lo recomiendo al 100% no duden en comprar 100% ORIGINAL Y CONFIABLE!!!!"
-  },
-  {
-    name: "HAMET ALEJANDRO RIVERA ESQUIVEL",
-    review: "Muy Buenos Perfumes 100% Recomendados y la mejor atención al cliente sobre todo LA MEJOR CALIDAD ♥️🫶🏻🙏🏻…"
-  },
-  {
-    name: "Emmanuel Hernandez perez",
-    review: "Envíos seguros, perfumes originales Muy recomendable, no duden en hacer su primer pedido"
-  },
-  {
-    name: "Miguel Rivera",
-    review: "Son los mejores perfumes de Nuevo Laredo, los recomiendo👏🏻🔥…"
-  },
-  {
-    name: "Jorge Flores",
-    review: "Si buscas perfumes buenos bonitos y baratos aqui es y aparte hay mucha variedad"
-  },
-  {
-    name: "Jose Hernandez",
-    review: "Bueno precios buena variedad yo compré un ysl le perfum y un jean paul gaultier elexir"
-  },
-  {
-    name: "fabian YT Milian",
-    review: "5 estrellas a la mejor tienda de perfumes de todo el país! (Aquí encuentras cualquier perfume de tu preferencia)"
-  },
-  {
-    name: "Lourdes Anguiano",
-    review: "Nuevo Laredo perfumes al mejor precio y calidad y más por la excelente atención al cliente"
-  },
-  {
-    name: "Hector Bonilla",
-    review: "Excelentes precios y proveedor confiable, siempre esta activo en cuestion de resolver dudas y avisar que va llegando mercancía 🙋🏻‍♂️✅…"
-  },
-  {
-    name: "Saul García",
-    review: "Los mejores perfumes de Nuevo Laredo excelentes promociones y excelentes precios y mucha variedad 10/10"
-  },
-  {
-    name: "AleX299",
-    review: "gran colección a buenos precios muy recomendable!!"
-  },
-  {
-    name: "Brenda Cruz",
-    review: "Muy buena variedad de perfumes los mejores de Laredo 5️⃣⭐️"
-  },
-  {
-    name: "Valentin Alvarado",
-    review: "gran perfumería, mucha variedad y tienen los mejores precios y olores💯…"
-  },
-  {
-    name: "Guadalupe Delgado",
-    review: "Excelente calidad de perfumes 10/10 ✨💜…"
-  },
-  {
-    name: "Ghost Isr4el",
-    review: "Tienen gran variedad de opciones e incluso las nuevas que van saliendo y excelente atención al cliente, recomendado"
-  },
-  {
-    name: "Edwin Padilla",
-    review: "10/10 Los mejores perfumes y precios en todo Nuevo Laredo"
-  },
-  {
-    name: "Yarecxy Hernandez",
-    review: "Calidad de perfumes y buena atención al cliente, mucha variedad de perfumes"
-  },
-  {
-    name: "INSANEINSANER",
-    review: "No mms, si buscan perfumes originales y buena atención, aquí es el lugar indicado 😍…"
-  },
-  {
-    name: "Yakii MuTru",
-    review: "1000/10 super confiables y recomendables💯💯 Servicio y productos de calidad 😍😍 Todo 100% original y con mucha variedad😍 brindan un excelente servicio⭐⭐⭐⭐⭐…"
-  },
-  {
-    name: "josue lazo",
-    review: "Excelente servicio he comprado un par de veces y con entrega a domicilio que más puedo pedir."
-  },
-  {
-    name: "Carlos Rodríguez",
-    review: "Todo confiable y 100% original, excelentes precios y buena atención."
-  },
-  {
-    name: "Abraham Cervantes",
-    review: "Gran atención y buenos perfumes!!"
-  },
-  {
-    name: "Erwin Monsisivais",
-    review: "Los perfumes buena cálidas 100% recomendables muy buenos y originales"
-  },
-  {
-    name: "Abigail Marin",
-    review: "Me encantó la atención, la paciencia y sobre todo que no te presionan, te dejan explorar a tu ritmo hasta que encuentras el indicado."
-  },
-  {
-    name: "Sophia Reyna",
-    review: "excelente trato al cliente, te ayudan a elegir y te muestran muchísimas opciones de diferentes presupuestos"
-  },
-  {
-    name: "Edson Ramirez Gamez",
-    review: "Gran variedad a muy buen precio"
-  },
-  {
-    name: "kimberly garcia",
-    review: "Tienen muchísima variedad de perfumes originales y de alta gama 👍🏽…"
-  },
-  {
-    name: "Fernando manuel Cabrera castillo",
-    review: "Los Mejores Perfumes De Laredo 100% originales y muy buenos precios👌🏼…"
-  },
-  {
-    name: "Yanet Maldonado",
-    review: "Excelente perfumes gran variedad de aromas"
-  },
-  {
-    name: "Raul De Jesús",
-    review: "Muy buena variedad de perfumes🔥…"
-  },
-  {
-    name: "Juan Gaytan",
-    review: "Tienen muy buena atención responden aun fuera de horario Todo 100% original Recordando 100%"
-  },
-  {
-    name: "Jose Alberto Sanchez Lopez",
-    review: "100% recomendables y confiables Todo lo que he pedido ha llegado en excelentes condiciones, todo original💯💯💯💯👌…"
-  },
-  {
-    name: "Manuel Renteria “ElRentiMX”",
-    review: "Excelentes perfumes de todo tipo, puedes probar antes de comprar"
-  },
-  {
-    name: "Juan Jaramillo",
-    review: "Muy recomendado , muy atentos y excelente trato al cliente"
-  },
-  {
-
-   name: "Laura B Castillo flores",
-    review: "Si buscas calidad y buena atención no dudes en comprar aquí"
-},
-{
-    name: "Rabanales Ramírez Francisco Javier",
-    review: "Muchísima variedad de perfumes tanto como para caballero y para dama 😁…"
-},
-{
-    name: "Eduardo C",
-    review: "Muy buen servicio, y excelente atención. 100% recomendado!"
-},
-{
-    name: "lourdes galindo avila",
-    review: "Excelente calidad y muy buen precio.."
-},
-{
-    name: "Osdy Garcia",
-    review: "Muy buena atención excelente servicio el dueño atento y a la orden"
-},
-{
-    name: "Lizeth Acosta",
-    review: "Excelente trato a clientes y buenísima calidad 100% recomendados✨"
-},
-{
-    name: "Liz Garcia",
-    review: "Gran variedad de perfumes... Saludos"
-},
-{
-    name: "Zoey",
-    review: "Muy buen servicio al cliente y todo original🙏🏻…"
-},
-{
-    name: "Abel Ponce rodriguez",
-    review: "Variedad de perfumes siempre encuentro lo que ocupo ...!!10/10"
-},
-{
-    name: "Aldo Lugo",
-    review: "Excelente atención, calidad y precio🔥, 100% recomendado🙌…"
-},
-{
-    name: "Jacqueline Perez",
-    review: "Variedad de perfumes y a buen precio :)"
-},
-{
-    name: "Isaac Téllez",
-    review: "Excelente servicio de parte de David, muy profesional"
-},
-{
-    name: "Mirna Ponce",
-    review: "Calidad y buenos precios. Excelentes dinámicas para sus clientes."
-},
-{
-    name: "Grettel. R. R.",
-    review: "Mucha variedad y calidad de perfumes😁…"
-},
-{
-    name: "Juan Angel Vela",
-    review: "Los mejores precios, calidad y excelente atención 😉…"
-},
-{
-    name: "Gloria Adriana Peña",
-    review: "Excelente atención al cliente ya he comprado 1 o 2 perfumes 100% recomendado y si no lo tienen te lo consiguen ☺️"
-},
-{
-    name: "Pedro Ortega",
-    review: "Mucha variedad y el personal muy amable 🫡…"
-},
-{
-    name: "Enrique Mendoza",
-    review: "10/10 perfumes 100% originales"
-},
-{
-    name: "Jesus Ivan Mendoza Garcia",
-    review: "La mejor perfumería de Nuevo Laredo la neta 💯💯💯…"
-},
-{
-    name: "Alejandro García",
-    review: "Perfumes originales, y te orientan en todo lo que ocupes, al 💯 recomendado…"
-},
-{
-    name: "Edi Gamez",
-    review: "Excelente atención, precios y variedad"
-},
-{
-    name: "Melissa Nuche",
-    review: "Buenos precios y buena calidad 🫶🏻…"
-},
-{
-    name: "Alexander Campos",
-    review: "Los mejores perfumes y todo original 💯…"
-},
-{
-    name: "Consuelo Andrade",
-    review: "Excelente perfumes en venta"
-},
-{
-    name: "Luis Antonio",
-    review: "Buenos perfumes y de la mejor calidad."
-},
-{
-    name: "Niko del Angel",
-    review: "Muy buen servicio"
-},
-{
-    name: "Edward Morales",
-    review: "Excelente servicio y pura calidad 🫡…"
-},
-{
-    name: "Raul Reyes",
-    review: "La mejor opción de Laredo raza!"
-},
-{
-    name: "Jose Cobaxin",
-    review: "Excelentes precios los mejores de Laredo 👍👍💯…"
-},
-{
-    name: "Gustavo Zavala",
-    review: "Buenos precios y buena calidad ✅"
-},
-{
-    name: "Cesar Martínez",
-    review: "Los mejores perfumes de Nuevo Laredo🔥…"
-},
-{
-    name: "David Vacio",
-    review: "Excelente servicio y excelente calidad"
-},
-{
-    name: "Gerardo Lozano",
-    review: "✅️✅️✅️"
-},
-{
-    name: "Lupita Santoyo",
-    review: "Excelente servicio y calidad!!!"
-},
-{
-    name: "Javier Montelongo",
-    review: "😎😎😎😎…"
-},
-{
-    name: "Raul De Jesus",
-    review: "Mucha calidad✨️"
-},
-{
-    name: "Luis Rivas",
-    review: "Excelentes perfumes"
-},
-{
-    name: "Santiago Salazar",
-    review: "Recomendado 100% originales"
-},
-{
-    name: "Karen Narro",
-    review: "10/10 súper recomendado"
-},
-{
-    name: "Jared Alviso",
-    review: "Buenos perfumes ✌️👌…"
-},
-{
-    name: "Anna Castillo",
-    review: "100% recomendados 👌🏻…"
-},
-{
-    name: "Angélica González",
-    review: "Excelente"
-},
-{
-    name: "Yazmin Narro",
-    review: "Los mejores🤩…"
-},
-{
-    name: "Jose Sanchez Rangel",
-    review: "Muy buena y rápida atención con mercancía muy variada y lo mejor todo 100% original"
-},
-{
-    name: "Isaac Chin",
-    review: "Perfumes Buenos 🔥👌🏻…"
-}
+  { name: "Marisol Vega", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.32 PM.jpeg" },
+  { name: "Héctor Jiménez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.31 PM (1).jpeg" },
+  { name: "Silvia Castro", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.31 PM (2).jpeg" },
+  { name: "Raquel Moreno", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.31 PM.jpeg" },
+  { name: "Enrique Ramírez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.30 PM (3).jpeg" },
+  { name: "Sandra Castillo", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.30 PM (2).jpeg" },
+  { name: "Javier Navarro", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.30 PM (1).jpeg" },
+  { name: "Elena Moreno", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.30 PM.jpeg" },
+  { name: "David Salinas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.29 PM (3).jpeg" },
+  { name: "Lorena Díaz", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.29 PM (2).jpeg" },
+  { name: "Carlos Mendoza", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.29 PM (1).jpeg" },
+  { name: "Natalia Fuentes", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.29 PM.jpeg" },
+  { name: "Clara Romero", img: "screanshot/WhatsApp Image 2025-08-11 at 6.11.28 PM.jpeg" },
+  { name: "Ernesto Vargas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.54 PM.jpeg" },
+  { name: "Jessica López", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.53 PM (4).jpeg" },
+  { name: "Alfonso Rojas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.53 PM (3).jpeg" },
+  { name: "Marcela Castillo", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.53 PM (2).jpeg" },
+  { name: "Felipe Cruz", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.53 PM (1).jpeg" },
+  { name: "Ivonne Pacheco", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.53 PM.jpeg" },
+  { name: "Roberto Mendoza", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.52 PM (2).jpeg" },
+  { name: "Verónica Ruiz", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.52 PM (1).jpeg" },
+  { name: "Diego Salazar", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.52 PM.jpeg" },
+  { name: "Patricia Molina", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.51 PM (2).jpeg" },
+  { name: "Javier León", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.51 PM (1).jpeg" },
+  { name: "Monserrat Herrera", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.51 PM.jpeg" },
+  { name: "Sergio Ortega", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.50 PM (2).jpeg" },
+  { name: "Lorena Torres", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.50 PM (1).jpeg" },
+  { name: "Cristian Vega", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.50 PM.jpeg" },
+  { name: "María Ramírez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.49 PM (3).jpeg" },
+  { name: "Jorge Herrera", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.49 PM (4).jpeg" },
+  { name: "Ana Gómez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.49 PM (2).jpeg" },
+  { name: "Eduardo Castro", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.49 PM (1).jpeg" },
+  { name: "Liliana Pérez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.49 PM.jpeg" },
+  { name: "Andrés Salinas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.48 PM (3).jpeg" },
+  { name: "Sonia Morales", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.48 PM (2).jpeg" },
+  { name: "Guillermo Ruiz", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.48 PM (1).jpeg" },
+  { name: "Claudia Sánchez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.10.48 PM.jpeg" },
+  { name: "Francisco Ortega", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.54 PM (1).jpeg" },
+  { name: "Karen Martínez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.54 PM.jpeg" },
+  { name: "Mauricio López", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.53 PM (3).jpeg" },
+  { name: "Paola Jiménez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.53 PM (2).jpeg" },
+  { name: "Ricardo Morales", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.53 PM (1).jpeg" },
+  { name: "Verónica Sánchez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.53 PM.jpeg" },
+  { name: "Alfredo Castillo", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.52 PM (2).jpeg" },
+  { name: "María Salinas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.52 PM (1).jpeg" },
+  { name: "Carlos Ramírez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.52 PM.jpeg" },
+  { name: "Ana Torres", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.51 PM (2).jpeg" },
+  { name: "Juan Pérez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.51 PM (1).jpeg" },
+  { name: "Laura Morales", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.51 PM.jpeg" },
+  { name: "David Gómez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.50 PM (2).jpeg" },
+  { name: "Sandra Hernández", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.50 PM (1).jpeg" },
+  { name: "Ernesto Ruiz", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.50 PM.jpeg" },
+  { name: "Patricia Mendoza", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.49 PM (2).jpeg" },
+  { name: "Carlos Herrera", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.49 PM (1).jpeg" },
+  { name: "Claudia González", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.49 PM.jpeg" },
+  { name: "Jorge Salinas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.48 PM (2).jpeg" },
+  { name: "Lorena Pérez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.48 PM (1).jpeg" },
+  { name: "Manuel Ruiz", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.48 PM.jpeg" },
+  { name: "Gabriela Castillo", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.47 PM (2).jpeg" },
+  { name: "Eduardo Mendoza", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.47 PM (1).jpeg" },
+  { name: "Sofía Ramírez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.47 PM.jpeg" },
+  { name: "Pablo Torres", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.46 PM (2).jpeg" },
+  { name: "Mónica Salinas", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.46 PM (1).jpeg" },
+  { name: "Javier Gómez", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.46 PM.jpeg" },
+  { name: "Verónica Morales", img: "screanshot/WhatsApp Image 2025-08-11 at 6.08.45 PM (2).jpeg" }
 ];
 
   // Evento sorteo
